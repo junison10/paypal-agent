@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PayPal Agent — bayar pakai bahasa natural</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div>
+      <h1>PayPal Agent</h1>
+      <p class="tagline">bayar pakai bahasa natural</p>
+    </div>
+    <div class="badges">
+      <span class="badge sandbox">SANDBOX — no real money</span>
+      <span class="badge mode" id="modeBadge">mode: …</span>
+    </div>
+  </div>
+  <div class="warning" role="alert">
+    ⚠️ Sandbox only — no real money moves. Every payment needs your explicit confirmation.
+  </div>
+</header>
+
+<main class="layout">
+  <section class="chat-col" aria-label="Chat">
+    <div id="chat" class="chat" aria-live="polite"></div>
+
+    <div class="chips" aria-label="Example prompts">
+      <button type="button" class="chip" data-prompt="bayar $25 ke supplier@example.com buat invoice #123">bayar $25 ke supplier@example.com buat invoice #123</button>
+      <button type="button" class="chip" data-prompt="pay 100 USD to alice@test.com for hosting">pay 100 USD to alice@test.com for hosting</button>
+      <button type="button" class="chip" data-prompt="kirim $10 ke bob@test.com">kirim $10 ke bob@test.com</button>
+    </div>
+
+    <form id="composer" class="composer">
+      <label class="sr-only" for="input">Payment instruction</label>
+      <input id="input" type="text" autocomplete="off"
+             placeholder="Contoh: bayar $25 ke supplier@example.com buat invoice #123" required>
+      <button type="submit" id="sendBtn">Send</button>
+    </form>
+    <p class="hint">Type a payment instruction in Indonesian or English. The agent parses it, checks the guardrails, and waits for your confirmation — nothing is sent to PayPal before you press Confirm.</p>
+  </section>
+
+  <aside class="side-col" aria-label="Settings, allowlist and history">
+    <section class="panel" id="settingsPanel">
+      <h2>Settings</h2>
+      <form id="settingsForm">
+        <label>Per-transaction cap
+          <input id="perTxCap" type="number" min="0" step="0.01" inputmode="decimal" required>
+        </label>
+        <label>Daily cap
+          <input id="dailyCap" type="number" min="0" step="0.01" inputmode="decimal" required>
+        </label>
+        <label>Currency
+          <select id="currency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="SGD">SGD</option>
+            <option value="AUD">AUD</option>
+            <option value="CAD">CAD</option>
+          </select>
+        </label>
+        <button type="submit">Save settings</button>
+        <p class="form-msg" id="settingsMsg" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="panel" id="allowlistPanel">
+      <h2>Allowlist</h2>
+      <p class="panel-note">Only recipients on this list can be paid.</p>
+      <form id="allowlistForm">
+        <label class="sr-only" for="allowlistEmail">Recipient email</label>
+        <input id="allowlistEmail" type="email" placeholder="name@example.com" required>
+        <button type="submit">Add</button>
+      </form>
+      <ul id="allowlist" class="allowlist"></ul>
+      <p class="form-msg" id="allowlistMsg" aria-live="polite"></p>
+    </section>
+
+    <section class="panel" id="historyPanel">
+      <h2>Transaction history</h2>
+      <p class="panel-note">Newest first. Every confirmed or cancelled payment is logged here.</p>
+      <ul id="history" class="history"></ul>
+    </section>
+  </aside>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
