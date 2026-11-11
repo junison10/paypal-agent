@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "description": "Sandbox PayPal agent for the PayPal hackathon \u2014 natural-language payments with guardrails and human confirmation. Sandbox only, no real money.",
+  "main": "src/index.js",
+  "name": "paypal-agent",
+  "scripts": {
+    "start": "node --env-file=.env src/index.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "version": "0.1.0"
+}
